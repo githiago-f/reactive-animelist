@@ -1,6 +1,6 @@
 <ul id="show-list">
   <li *ngFor="let show of showlistObservable | async, let i = index">
-    <a [href]="'/' + show.slug"
+    <a [href]="'/show/' + show.slug"
       (mouseenter)="hoverItem = i"
       (mouseleave)="hoverItem = -1">
       <div [class.flex-card]="hoverItem === i">

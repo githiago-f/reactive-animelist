@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
 import { ENV } from 'src/env';
-import { Show } from '../entity/show';
+import { Show, ShowDetail } from '../../show/entity/show';
 
 @Injectable({ providedIn: 'root' })
 export class ShowService {
@@ -12,7 +12,7 @@ export class ShowService {
     return from(fetch(this.BASE_URL).then(r => r.json()));
   }
 
-  getShow(slug: string) {
+  getShow(slug: string): Observable<ShowDetail> {
     const url = this.BASE_URL.toString() + '/' + slug;
     return from(fetch(url).then(r => r.json()));
   }

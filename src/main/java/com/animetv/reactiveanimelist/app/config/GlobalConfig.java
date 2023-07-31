@@ -10,9 +10,9 @@ import org.springframework.web.reactive.config.WebFluxConfigurer;
 public class GlobalConfig implements WebFluxConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/shows*")
-            .allowedOrigins("*")
-            .allowedMethods("GET")
+        registry.addMapping("/shows/**")
+            .allowedOrigins("*")    
+            .allowedMethods("*")
             .maxAge(3600);
     }
 }

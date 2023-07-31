@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PageComponent } from './page.component';
+import { ShowListComponent } from './show-list.component';
 
-describe('PageComponent', () => {
-  let component: PageComponent;
-  let fixture: ComponentFixture<PageComponent>;
+describe('ShowListComponent', () => {
+  let component: ShowListComponent;
+  let fixture: ComponentFixture<ShowListComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [PageComponent]
+      declarations: [ShowListComponent]
     });
-    fixture = TestBed.createComponent(PageComponent);
+    fixture = TestBed.createComponent(ShowListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

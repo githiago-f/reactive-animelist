@@ -11,6 +11,7 @@ public record ShowView(
     String slug, 
     String title, 
     String thumbnail, 
+    String description,
     Integer totalEpisodes,
     Set<Episode> episodes
 ) {
@@ -27,7 +28,8 @@ public record ShowView(
         return new ShowView(
             (String) row.get("slug"), 
             (String) row.get("title"), 
-            (String) row.get("thumbnail"), 
+            (String) row.get("thumbnail"),
+            (String) row.get("description"),
             rows.size(), 
             episodes
         );

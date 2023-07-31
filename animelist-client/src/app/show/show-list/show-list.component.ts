@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { ShowService } from '../service/show.service';
 import { Observable } from 'rxjs';
 import { Show } from '../entity/show';
-import { ShowService } from '../service/show.service';
 
 @Component({
-  selector: 'app-showlist-page',
-  templateUrl: './page.component.html',
-  styleUrls: ['./page.component.scss']
+  selector: 'app-show-list',
+  templateUrl: './show-list.component.html',
+  styleUrls: ['./show-list.component.scss']
 })
-export class PageComponent implements OnInit {
+export class ShowListComponent implements OnInit {
   showlistObservable?: Observable<Show[]>;
   hoverItem: number;
 
@@ -16,7 +16,7 @@ export class PageComponent implements OnInit {
     this.hoverItem = -1;
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.showlistObservable = this.showService.getAllShows();
   }
 }

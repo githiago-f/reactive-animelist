@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PageComponent } from './showlist/page/page.component';
+import { ShowListComponent } from './show/show-list/show-list.component';
+import { ShowDetailComponent } from './show/show-detail/show-detail.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', component: PageComponent },
+  { path: '', pathMatch: 'full', component: ShowListComponent },
+  { path: 'show/:slug', component: ShowDetailComponent }
 ];
 
 @NgModule({

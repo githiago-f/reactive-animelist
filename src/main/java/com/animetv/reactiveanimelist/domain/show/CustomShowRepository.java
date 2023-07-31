@@ -17,7 +17,7 @@ public class CustomShowRepository {
     
     public Mono<ShowView> findBySlug(String slug, Integer season) {
         final String SQL_STATEMENT = "SELECT " +
-                "s.slug slug, s.title title, s.thumbnail, " +
+                "s.slug, s.title, s.thumbnail, " +
                 "s.description, e.id \"episodeId\", e.title \"episodeTitle\", "+
                 "e.length \"episodeLength\", " +
                 "e.thumbnail \"episodeThumbnail\", e.season \"episodeSeason\"" +
