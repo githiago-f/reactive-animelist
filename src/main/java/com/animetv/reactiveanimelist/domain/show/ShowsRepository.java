@@ -11,7 +11,7 @@ import reactor.core.publisher.Flux;
 
 @Repository
 public interface ShowsRepository extends ReactiveCrudRepository<Show, String> {
-    @Query("SELECT s.slug, s.title, s.thumbnail, COUNT(e.id) episodes " +
+    @Query("SELECT s.slug, s.title, s.thumbnail, s.description, COUNT(e.id) episodes " +
             "FROM shows s " +
             "LEFT JOIN episodes e ON e.\"showSlug\" = s.slug " +
             "GROUP BY s.slug, s.title, s.thumbnail " +

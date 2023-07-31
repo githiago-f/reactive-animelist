@@ -1,0 +1,15 @@
+<ul id="show-list">
+  <li *ngFor="let show of showlistObservable | async, let i = index">
+    <a [href]="'/' + show.slug"
+      (mouseenter)="hoverItem = i"
+      (mouseleave)="hoverItem = -1">
+      <div [class.flex-card]="hoverItem === i">
+        <img [src]="show.thumbnail"/>
+        <div>
+          <h3>{{show.title}}</h3>
+          <p [class.hide-text]="hoverItem !== i">{{show.description}}</p>
+        </div>
+      </div>
+    </a>
+  </li>
+</ul>
