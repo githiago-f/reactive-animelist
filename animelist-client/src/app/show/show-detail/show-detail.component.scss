@@ -1,0 +1,13 @@
+.episodes {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0;
+  li {
+    margin-bottom: 1rem;
+  }
+  img {
+    max-width: 14rem;
+  }
+}

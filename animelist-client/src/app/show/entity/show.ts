@@ -4,6 +4,7 @@ export type Show = {
   thumbnail: string,
   description: string,
   episodes: number,
+  length: number,
 };
 
 export type ShowDetail = {

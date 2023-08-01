@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ShowService } from '../service/show.service';
-import { Observable, switchMap, tap } from 'rxjs';
-import { Show, ShowDetail } from '../entity/show';
+import { switchMap, catchError, from, throwError, tap, map } from 'rxjs';
+import { ShowDetail } from '../entity/show';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ShowDetailComponent implements OnInit {
   show?: ShowDetail;
+  error?: string;
 
   constructor(
     private showService: ShowService,
@@ -19,7 +20,20 @@ export class ShowDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.pipe(
-      switchMap(({slug}) => this.showService.getShow(slug))
+      switchMap(({slug}) => this.showService.getShow(slug)),
+      map(show => {
+        show.episodes.sort((a, b) => a.id - b.id);
+        return show;
+      }),
+      catchError((err: Error) => {
+        if(/Failed to fetch/gi.test(err.message)) {
+          this.error = 'Cannot access the service, please try again later!';
+        }
+        if(/Unexpected end of/gi.test(err.message)) {
+          this.error = 'Error when loading this show.'
+        }
+        return throwError(() => err);
+      }),
     ).subscribe(show => this.show = show);
   }
 }

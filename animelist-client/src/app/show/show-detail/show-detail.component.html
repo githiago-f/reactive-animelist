@@ -1,4 +1,18 @@
-<img [src]="show?.thumbnail"/>
-<h3>{{show?.title}}</h3>
-<p>{{show?.totalEpisodes}}</p>
-<p>{{show?.description}}</p>
+<p class="alert alert-danger my-3" *ngIf="error">{{error}}</p>
+<div *ngIf="!error" class="row">
+  <div class="col-12 col-sm-3 text-center mb-3">
+    <img [src]="show?.thumbnail"/>
+  </div>
+  <div class="col-12 col-sm-9">
+    <h3>{{show?.title}}</h3>
+    <p>Episodes: {{show?.totalEpisodes}}</p>
+    <p>{{show?.description}}</p>
+    <ul class="episodes">
+      <li *ngFor="let episode of show?.episodes">
+        <img [src]="episode.thumbnail" />
+        <h4>{{episode.title}}</h4>
+        <p class="text-body-tertiary">{{episode.length | videoLength}}</p>
+      </li>
+    </ul>
+  </div>
+</div>
