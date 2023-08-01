@@ -1,5 +1,7 @@
 package com.animetv.reactiveanimelist.domain.show;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.r2dbc.core.DatabaseClient;
 import org.springframework.stereotype.Repository;
 
@@ -9,6 +11,7 @@ import reactor.core.publisher.Mono;
 
 @Repository
 public class CustomShowRepository {
+    private final Logger logger = LoggerFactory.getLogger(getClass());
     private final DatabaseClient client;
 
     public CustomShowRepository(DatabaseClient client) {
@@ -17,10 +20,11 @@ public class CustomShowRepository {
     
     public Mono<ShowView> findBySlug(String slug, Integer season) {
         final String SQL_STATEMENT = "SELECT " +
-                "s.slug, s.title, s.thumbnail, " +
-                "s.description, e.id \"episodeId\", e.title \"episodeTitle\", "+
-                "e.length \"episodeLength\", " +
-                "e.thumbnail \"episodeThumbnail\", e.season \"episodeSeason\"" +
+                "s.slug, s.title, s.thumbnail, s.description, " + 
+                "(SELECT COUNT(id) FROM episodes WHERE \"showSlug\" = :slug) "+
+                "\"totalEpisodes\", e.id \"episodeId\", "+
+                "e.title \"episodeTitle\", e.length \"episodeLength\", " +
+                "e.thumbnail \"episodeThumbnail\", e.season \"episodeSeason\" " +
             "FROM shows s " + 
             "LEFT JOIN episodes e ON e.\"showSlug\" = s.slug " +
             "WHERE s.slug = :slug AND e.season = :season";

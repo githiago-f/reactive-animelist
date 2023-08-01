@@ -4,6 +4,7 @@ public record ShowItem(
     String slug, 
     String title, 
     String thumbnail,
-    String description, 
-    Integer episodes
+    String description,
+    Integer episodes,
+    Long length
 ) {}

@@ -3,6 +3,8 @@ package com.animetv.reactiveanimelist.app.http;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +22,7 @@ import reactor.core.publisher.Mono;
 @RestController
 @RequestMapping("/shows")
 public class ShowController {
+    private final Logger logger = LoggerFactory.getLogger(getClass());
     private final ShowsRepository showsRepository;
     private final CustomShowRepository customShowRepository;
     public ShowController(
@@ -46,6 +49,9 @@ public class ShowController {
     ) {
         return customShowRepository.findBySlug(slug, season.orElse(1))
             .map(ResponseEntity.ok()::body)
+            .doOnError(Throwable.class, err -> {
+                logger.error(slug, err);
+            })
             .onErrorReturn(ResponseEntity.notFound().build());
     }
 }

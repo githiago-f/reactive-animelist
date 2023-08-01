@@ -12,7 +12,7 @@ public record ShowView(
     String title, 
     String thumbnail, 
     String description,
-    Integer totalEpisodes,
+    Long totalEpisodes,
     Set<Episode> episodes
 ) {
     public static ShowView fromShowRowList(List<Map<String, Object>> rows) {
@@ -30,7 +30,7 @@ public record ShowView(
             (String) row.get("title"), 
             (String) row.get("thumbnail"),
             (String) row.get("description"),
-            rows.size(), 
+            (Long) row.get("totalEpisodes"), 
             episodes
         );
     }
