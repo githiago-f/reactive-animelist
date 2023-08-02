@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ShowService } from '../service/show.service';
-import { switchMap, catchError, from, throwError, tap, map } from 'rxjs';
+import { switchMap, catchError, throwError, map } from 'rxjs';
 import { ShowDetail } from '../entity/show';
 import { ActivatedRoute } from '@angular/router';
 
@@ -20,7 +20,7 @@ export class ShowDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.pipe(
-      switchMap(({slug}) => this.showService.getShow(slug)),
+      switchMap(({slug, season}) => this.showService.getShow(slug, season)),
       map(show => {
         show.episodes.sort((a, b) => a.id - b.id);
         return show;

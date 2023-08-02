@@ -1,7 +1,7 @@
 <p *ngIf="error" class="alert alert-danger">{{error}}</p>
 <ul id="show-list" *ngIf="!error">
   <li *ngFor="let show of showlistObservable | async, let i = index">
-    <a [href]="'/show/' + show.slug"
+    <a [href]="show.slug | showSlug"
       (mouseenter)="hoverItem = i"
       (mouseleave)="hoverItem = -1">
       <div [class.flex-card]="hoverItem === i">

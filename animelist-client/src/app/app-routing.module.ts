@@ -5,7 +5,7 @@ import { ShowDetailComponent } from './show/show-detail/show-detail.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: ShowListComponent },
-  { path: 'show/:slug', component: ShowDetailComponent }
+  { path: 'show/:slug/:season', component: ShowDetailComponent }
 ];
 
 @NgModule({

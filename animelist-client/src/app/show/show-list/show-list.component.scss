@@ -1,8 +1,8 @@
 #show-list {
   $color: #020202;
   list-style: none;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   margin: 0;
   padding: 1rem;
   li {
@@ -10,7 +10,6 @@
       text-decoration: none;
       color: $color;
       div {
-        $width: 209px;
         font-size: 1.2rem;
         margin-right: 1rem;
         .flex-card {
@@ -19,11 +18,11 @@
         }
         img {
           height: 302px;
-          width: $width;
+          width: 100%;
           object-fit: cover;
         }
         div {
-          width: $width;
+          width: 100%;
           .hide-text {
             height: 3.5rem;
             text-overflow: ellipsis;

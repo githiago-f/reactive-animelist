@@ -8,11 +8,15 @@ export class VideoLengthPipe implements PipeTransform {
     return String(val).padStart(2, '0');
   }
 
-  transform(value: number, ...args: unknown[]): unknown {
-    const hou = Math.floor(value / 3600);
+  transform(value: number, ...args: unknown[]): string {
     const min = Math.floor((value % 3600) / 60);
     const sec = Math.floor((value % 3600) % 60);
-    return `${this.pad(hou)}:${this.pad(min)}:${this.pad(sec)}`;
+    let result = `${this.pad(min)}:${this.pad(sec)}`;
+    if(value >= 3600) {
+      const hou = Math.floor(value / 3600);
+      result = this.pad(hou) + ':' + result;
+    }
+    return result;
   }
 
 }

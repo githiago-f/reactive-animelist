@@ -5,15 +5,18 @@ import { Show, ShowDetail } from '../../show/entity/show';
 
 @Injectable({ providedIn: 'root' })
 export class ShowService {
-  private readonly BASE_URL = new URL('/shows', ENV.API_URL);
+  private readonly BASE_URL = () => new URL('/shows', ENV.API_URL);
 
   getAllShows(page = 0): Observable<Show[]> {
-    this.BASE_URL.searchParams.append('page', String(page));
-    return from(fetch(this.BASE_URL).then(r => r.json()));
+    const url = this.BASE_URL()
+    url.searchParams.append('page', String(page));
+    return from(fetch(url).then(r => r.json()));
   }
 
-  getShow(slug: string): Observable<ShowDetail> {
-    const url = this.BASE_URL.toString() + '/' + slug;
+  getShow(slug: string, season: string): Observable<ShowDetail> {
+    const url = this.BASE_URL();
+    url.pathname += '/' + slug;
+    url.searchParams.append('season', season);
     return from(fetch(url).then(r => r.json()));
   }
 }
